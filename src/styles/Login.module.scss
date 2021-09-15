@@ -1,0 +1,47 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--backgroundColor);
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 100vh;
+
+  .containerDescription {
+    width: 45%;
+    height: 100%;
+    background-color: var(--primary);
+  }
+
+  .containerForm {
+    flex: 1;
+    height: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .loginContent {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      
+      padding: 0 1rem 2rem 1rem;
+      
+    }
+    
+  }
+}
+
+
+
+@media (max-width: 720px) {
+  .containerDescription {
+    display: none;
+  }
+
+}

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: .5rem 3rem;
+  border: none;
+  box-shadow: 0 0 .25rem #727171;
+  border-radius: .5rem;
+  cursor: pointer;
+  color: var(--title-color);
+  transition: 300ms ease-in-out;
+
+  .title {
+    font-size: 1rem;
+    font-family: var(--title-font);
+    margin-left: .5rem;
+  }
+
+  &:hover {
+    background-color: var(--secondaryDark);
+    color: var(--backgroundColor);
+    
+  }
+
+}
