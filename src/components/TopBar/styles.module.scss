@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  
+  background-color: var(--secondaryDark);
+  padding: .5rem 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .menu {
+    color: #FFF;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 300ms;
+
+    &:hover {
+      color: var(--primary)
+    }
+  }
+
+  .userDetails {
+    display: flex;
+    align-items: center;
+
+    .userName {
+      color: #FFF;
+      margin-right: 1rem;
+      font-family: var(--title);
+    }
+
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    
+
+  }
+
+}

@@ -5,7 +5,8 @@
 }
 
 :root {
-  --backgroundColor: #ECEFF1;
+  --backgroundColor: #F5F5F5;
+  --body: #ECEFF1;
 
   --primary: #FFA000;
 

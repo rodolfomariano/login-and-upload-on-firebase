@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  .contentContainer {
+    display: flex;
+
+    .content {
+      flex: 1;
+      height: calc(100vh - 51px);
+      padding: 1rem 1rem 2rem 1rem;
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

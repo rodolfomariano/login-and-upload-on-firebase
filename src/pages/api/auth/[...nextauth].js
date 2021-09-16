@@ -19,4 +19,16 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
+  // callbacks: {
+  //   async signIn(user, account, profile) {
+  //     if (account.provider === 'google' &&
+  //       profile.verified_email === true &&
+  //       profile.email.endsWith('@myDomain.com')) {
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   },
+  // }
+
 })
