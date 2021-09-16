@@ -46,48 +46,7 @@
 }
 
 .navBarContainerHidden {
-  width: 200px;
-  height: calc(100vh - 51px);
-  background-color: var(--body);
-  box-shadow: 2px 1px 4px #ccc;
-  padding: 2rem 1rem 0 1rem;
-
   margin-left: -200px;
   transition: margin-left 700ms ease-in;
-
-  .menuContainer {
-    flex: 1;
-    width: 100%;
-    height: calc(100vh - 140px);
-  }
-
-  .containerExit {
-    width: 100%;
-    border-top: 1px solid #ccc;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .exitButton {
-      color: var(--attention);
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      transition: filter 300ms;
-      font-size: 1.2rem;
-      padding: 1rem 0;
-      font-size: 1rem;
-
-      display: flex;
-      gap: .25rem;
-      align-items: center;
-
-      &:hover {
-        filter: opacity(.8);
-      }
-
-    }
-  }
 
 }
