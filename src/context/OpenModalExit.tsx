@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
 interface OpenModalExitProviderProps {
   children: ReactNode
@@ -13,6 +13,7 @@ const OpenModalExitContext = createContext({} as OpenModalExitContextProps)
 
 export function OpenModalExitProvider({ children }: OpenModalExitProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+
 
   return (
     <OpenModalExitContext.Provider value={{ isModalOpen, setIsModalOpen }}>

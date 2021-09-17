@@ -8,12 +8,11 @@ import { MdPowerSettingsNew } from "react-icons/md"
 
 import styles from './styles.module.scss'
 import { ModalExit } from "../ModalExit"
+import { useEffect } from "react"
 
 export function NavBar() {
   const { isOpenNavBar, setIsOpenNavBar } = useOpenNavBar()
   const { isModalOpen, setIsModalOpen } = useModalExit()
-
-  console.log(isModalOpen)
 
   return (
 
