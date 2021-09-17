@@ -6,14 +6,22 @@ import { MdClose } from "react-icons/md"
 import { useModalExit } from '../../context/OpenModalExit'
 
 import styles from './styles.module.scss'
+import { useEffect, useState } from "react"
 
 export function ModalExit() {
   const { isModalOpen, setIsModalOpen } = useModalExit()
+  const [useAnimation, setUseAnimation] = useState(``)
 
   const router = useRouter()
 
   function handleCloseModal() {
     setIsModalOpen(false)
+
+    setTimeout(() => {
+      setUseAnimation(`${styles.hidden}`)
+    }, 700)
+    setUseAnimation(`${styles.hiddenZoomOut}`)
+
   }
 
   async function handleExit() {
@@ -22,8 +30,8 @@ export function ModalExit() {
   }
 
   return (
-    <div className={isModalOpen ? styles.container : `${styles.container} ${styles.hidden}`}>
-      <div className={styles.content}>
+    <div className={isModalOpen ? styles.container : `${styles.container} ${useAnimation}`}>
+      <div className={isModalOpen ? styles.content : `${styles.content} ${styles.hiddenZoomOut}`} >
         <header>
           Sair da aplicação
           <button onClick={handleCloseModal}>
