@@ -1,15 +1,6 @@
 import firebase from 'firebase/app'
 
-import 'firebase/auth'
-
-// if (!firebase.apps.length) {
-//   firebase.initializeApp({
-//     apiKey: "AIzaSyD4gTk5gCVJBNFb8aW_74O-Wt5LM4JyVWw",
-//     authDomain: "loginandupload-79285.firebaseapp.com",
-//     projectId: "loginandupload-79285",
-//   })
-// }
-
+import 'firebase/storage'
 
 
 const firebaseConfig = {
@@ -20,24 +11,13 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_APP_ID
 }
+// Initialize Firebase
 
-firebase.initializeApp(firebaseConfig)
-
-/*
-
-
-firebase.initializeApp(firebaseConfig)
-// @ts-ignore
-const auth = firebase.auth()
-// @ts-ignore
-const database = firebase.database()
-
-
-export {
-  firebase,
-  auth, 
-  database 
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig)
+} else {
+  firebase.app(); // if already initialized, use that one
 }
 
-*/
 export default firebase
+
