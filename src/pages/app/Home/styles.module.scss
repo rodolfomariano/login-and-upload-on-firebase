@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  background-color: #F5F5F5;
+  background-color: var(--backgroundColor);
   flex: 1;
 
   display: flex;
@@ -9,45 +9,72 @@
 
   .contentContainer {
     display: flex;
+    min-height: 100%;
 
     .content {
       flex: 1;
       height: calc(100vh - 51px);
       padding: 1rem 1rem 2rem 1rem;
+      overflow-y: auto;
 
       .title {
         font-size: 1.5rem;
       }
 
-      .fileForm {
-        width: 100%;
-        
+      .selectFiles {
+        border: 1px dashed #ccc;
+        padding: 2rem 1rem;
+        margin: 1rem 0;
+        border-radius: .5rem;
 
-        .fileLabel {
+        .fileForm {
+          width: 100%;
           
-          display: inline-block;
-          padding: .5rem 2rem;
-          background-color: var(--primary);
-          color: var(--backgroundColor);
-          margin: 2rem 0 1rem 0;
-          border-radius: .5rem;
-          cursor: pointer;
-          user-select: none;
+  
+          .fileLabel {
+            display: inline-block;
+            padding: .5rem 2rem;
+            background-color: var(--primary);
+            color: var(--backgroundColor);
+            margin: 0 0 1rem 0;
+            border-radius: .5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 300ms;
+
+            &:hover {
+              background-color: #d48700;
+            }
+          }
+    
+          .fileInput {
+            display: none;
+          }
+    
         }
   
-        .fileInput {
-          display: none;
-        }
+        .noFile {
+          width: 400px;
+          height: 56px;
+          padding: 2rem;
   
-        progress {
-          width: 300px;
-          height: 20px;
-          color: #aaa;
-          margin-right: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
         }
 
+        .fileDataContainer {
+          padding: 1rem 0;
+
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 1rem;
+        }
+  
       }
 
+      
     }
   }
 }

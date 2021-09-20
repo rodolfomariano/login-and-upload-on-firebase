@@ -10,6 +10,7 @@ import { NavBar } from '../../../components/NavBar'
 import styles from './styles.module.scss'
 import { CardFileTransfer } from '../../../components/CardFileTransfer'
 
+
 export default function Home() {
   const [session, loading] = useSession()
   const [fileData, setFileData] = useState({})
@@ -18,6 +19,7 @@ export default function Home() {
 
   const [progressTransfer, setProgressTransfer] = useState(0)
 
+  const [uploadTransfer, setUploadTransfer] = useState([] as any)
 
   const router = useRouter()
 
@@ -28,11 +30,15 @@ export default function Home() {
     const userInfo = session?.user?.email
 
 
-
     if (event.target.files) {
-      setFileData(event.target.files[0])
+      setFileData(event.target.files)
 
       const storageRef2 = firebase.storage()
+      let myFile = Array.from(event.target.files)
+
+      setUploadTransfer(myFile)
+
+      // for (let i = 0; i <= event.target.files.length; i++) {
 
       if (event.target.files[0]) {
         let file = event.target.files[0]
@@ -40,14 +46,15 @@ export default function Home() {
         setFileSize(file.size)
         setFileName(file.name)
 
+
         const uploadTask = storageRef2.ref(`${bucketName}/${userInfo}/${file.name}`)
           .put(file)
-
 
         uploadTask.on("state_changed", function (snapshot) {
           let progress = (snapshot.bytesTransferred * 100 / snapshot.totalBytes)
           let progressFormatted = progress.toFixed(0)
           setProgressTransfer(Number(progressFormatted))
+
 
         }, function (error) {
           console.log(error)
@@ -61,11 +68,12 @@ export default function Home() {
           console.log('Upload success')
         })
       }
+      // }
+
+
     }
 
   }
-
-
 
   useEffect(() => {
     if (!fileData) {
@@ -77,7 +85,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    console.log(progressTransfer)
+    // console.log(progressTransfer)
   }, [progressTransfer])
 
 
@@ -85,49 +93,60 @@ export default function Home() {
     !session && router.push('/')
   }, [session, router])
 
-  console.log(fileName)
 
   return (
     <div className={styles.container}>
       <TopBar />
 
-      <div className={styles.contentContainer}>
+      <div className={styles.contentContainer} >
         <NavBar />
         <div className={styles.content}>
           <h1 className={styles.title}>Home</h1>
 
+          <header
+            className={styles.selectFiles}
 
-          <form className={styles.fileForm}>
-            <label htmlFor="file" className={styles.fileLabel}>Selecione o arquivo</label> <br />
+          >
 
-            <input
-              className={styles.fileInput}
-              type="file"
-              id="file"
-              onChange={(event) => handleChangeFile(event)}
-            />
-          </form>
-          <div className={styles.fileDataContainer}>
-            {fileSize > 0 && (
-              <>
-                {/* <span>{fileName}</span> <br />
-                <span>{`${(fileSize / (fileSize < 999999 ? 1000 : 1000000)).toFixed(2)} ${fileSize < 999999 ? 'kB' : 'MB'}`}</span>
-                <progress max="100" value={progressTransfer} />
-                <span>{`${progressTransfer}%`}</span> */}
-              </>
-            )
-            }
+            <form className={styles.fileForm}>
+              <label htmlFor="file" className={styles.fileLabel}>Selecione o arquivo</label> <br />
 
-            <CardFileTransfer
-              title={fileName}
-              size={fileSize}
-              percentage={progressTransfer}
-            />
+              <input
+                className={styles.fileInput}
+                type="file"
+                id="file"
+                onChange={(event) => handleChangeFile(event)}
+              // multiple
+              />
+            </form>
+            <div className={styles.fileDataContainer}>
+              {fileSize === 0
+                ? (
+                  <div className={styles.noFile}>
+                    <span>Selecione um arquivo</span>
+                  </div>
+                )
+                : uploadTransfer.map((file: any, index: number) => {
+                  return (
+                    <CardFileTransfer
+                      key={index}
+                      title={file.name}
+                      size={file.size}
+                      percentage={progressTransfer}
+                    />
+                  )
 
-          </div>
-
+                })
+              }
+            </div>
+          </header>
 
           <div>
+            <h5>Transferencia recente</h5>
+            <h5>Transferencia recente</h5>
+            <h5>Transferencia recente</h5>
+            <h5>Transferencia recente</h5>
+            <h5>Transferencia recente</h5>
             <h5>Transferencia recente</h5>
 
 
