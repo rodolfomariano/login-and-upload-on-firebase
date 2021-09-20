@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useSession } from "next-auth/client"
 import { useRouter } from 'next/dist/client/router'
 
@@ -8,6 +8,7 @@ import { TopBar } from '../../../components/TopBar'
 import { NavBar } from '../../../components/NavBar'
 
 import styles from './styles.module.scss'
+import { CardFileTransfer } from '../../../components/CardFileTransfer'
 
 export default function Home() {
   const [session, loading] = useSession()
@@ -36,10 +37,12 @@ export default function Home() {
       if (event.target.files[0]) {
         let file = event.target.files[0]
 
+        setFileSize(file.size)
+        setFileName(file.name)
+
         const uploadTask = storageRef2.ref(`${bucketName}/${userInfo}/${file.name}`)
           .put(file)
 
-        setFileSize(file.size)
 
         uploadTask.on("state_changed", function (snapshot) {
           let progress = (snapshot.bytesTransferred * 100 / snapshot.totalBytes)
@@ -50,9 +53,10 @@ export default function Home() {
           console.log(error)
 
         }, function () {
-          setFileData({})
-          setProgressTransfer(0)
-          setFileSize(0)
+          // setFileData({})
+          // setProgressTransfer(0)
+          // setFileSize(0)
+          // setFileName('')
 
           console.log('Upload success')
         })
@@ -71,6 +75,7 @@ export default function Home() {
     }
   }, [fileData])
 
+
   useEffect(() => {
     console.log(progressTransfer)
   }, [progressTransfer])
@@ -79,6 +84,8 @@ export default function Home() {
   useEffect(() => {
     !session && router.push('/')
   }, [session, router])
+
+  console.log(fileName)
 
   return (
     <div className={styles.container}>
@@ -90,12 +97,35 @@ export default function Home() {
           <h1 className={styles.title}>Home</h1>
 
 
-          <div>
-            <input type="file" onChange={(event) => handleChangeFile(event)} />
-            <span>{fileSize > 0 && fileSize}</span>
-            <progress max="100" value={progressTransfer} />
-            <span>{fileSize > 0 && progressTransfer}</span>
+          <form className={styles.fileForm}>
+            <label htmlFor="file" className={styles.fileLabel}>Selecione o arquivo</label> <br />
+
+            <input
+              className={styles.fileInput}
+              type="file"
+              id="file"
+              onChange={(event) => handleChangeFile(event)}
+            />
+          </form>
+          <div className={styles.fileDataContainer}>
+            {fileSize > 0 && (
+              <>
+                {/* <span>{fileName}</span> <br />
+                <span>{`${(fileSize / (fileSize < 999999 ? 1000 : 1000000)).toFixed(2)} ${fileSize < 999999 ? 'kB' : 'MB'}`}</span>
+                <progress max="100" value={progressTransfer} />
+                <span>{`${progressTransfer}%`}</span> */}
+              </>
+            )
+            }
+
+            <CardFileTransfer
+              title={fileName}
+              size={fileSize}
+              percentage={progressTransfer}
+            />
+
           </div>
+
 
           <div>
             <h5>Transferencia recente</h5>

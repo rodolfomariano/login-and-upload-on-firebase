@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  width: 400px;
+  padding: 1rem 2rem;
+  background-color: var(--body);
+  border-radius: 0 0 .25rem .25rem;
+  box-shadow: 0 0 4px #ccc;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .titleOfFile {
+    font-family: var(--title);
+    font-weight: 400;
+    color: var(--title-color);
+  }
+
+  .sizeOfFile {
+    font-weight: 400;
+  }
+
+  .successProgress {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #156B39;
+    color: var(--backgroundColor);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circularProgress {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  
+}
